@@ -1,4 +1,5 @@
 # CharCut
+
 Character-based MT evaluation and difference highlighting
 
 CharCut compares outputs of MT systems with reference translations. It can compare multiple file pairs simultaneously and produce HTML outputs showing character-based differences along with scores that are directly inferred from the lengths of those differences, thus making the link between evaluation and visualisation straightforward.
@@ -15,25 +16,36 @@ It is intended to be lightweight and easy to use, so the HTML outputs are, and w
 CharCut is written in Python 3. It only relies on the standard library.
 
 Basic usage:
-```
+
+```bash
 python3 charcut.py cand.txt,ref.txt
 ```
+
 where `cand.txt` and `ref.txt` contain corresponding candidate (MT) and reference (human) segments, 1 per line. Multiple file pairs can be specified on the command line: candidates with references, candidates with other candidates, etc.
 By default, only document-level scores are displayed on standard output. To produce a HTML output file, use the `-o` option:
-```
+
+```bash
 python3 charcut.py cand.txt,ref.txt -o mydiff.html
 ```
 
 A few more options are available; call
-```
+
+```bash
 python3 charcut.py -h
 ```
+
 to list them.
 
 Consider lowering the `-m` option value (minimum match size) for non-alphabetical writing systems such as Chinese or Japanese. The default value (3 characters) should be acceptable for most European languages, but depending on the language and data, larger values might produce better looking results.
 
 ## Changes
+
+27/07/2022
+
+* forked by [Luis Kolb](https://github.com/LuisKolb) to include a directory crawler+formatting+execution script (`run.py`)
+
 09/07/2019
+
 * ported code to Python3
 * added support for comparing multiple file pairs simultaneously
 * removed "-c" and "-r" command line arguments, replaced with a space-separated list of (comma-separated) file pairs
