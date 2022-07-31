@@ -43,6 +43,7 @@ Consider lowering the `-m` option value (minimum match size) for non-alphabetica
 27/07/2022
 
 * forked by [Luis Kolb](https://github.com/LuisKolb) to include a directory crawler+formatting+execution script (`run.py`)
+* execute the script like `python run.py sample-data/ format`
 
 09/07/2019
 

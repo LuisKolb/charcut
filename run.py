@@ -38,7 +38,7 @@ def main(input, format):
                     with open(out_file, 'w') as output:
                         for sentence in text.split('.'):
                             if sentence.lstrip() == '':
-                                print(f'sentence:{sentence}')
+                                pass
                             else:
                                 output.write(f'{sentence.lstrip()}.\n')
             else:

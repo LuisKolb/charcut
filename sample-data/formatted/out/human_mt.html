@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>charcut output</title>
+  <style>
+    body {font-family: sans-serif; font-size: 11pt;}
+    table, td, th {border-spacing: 0;}
+    th {padding: 10px;}
+    td {padding: 5px;}
+    th {border-top: solid black 2px; font-weight: normal;}
+    #key {margin-left: auto; margin-right: auto; text-align: left;}
+    .tophead {border-bottom: solid black 1px;}
+    .src {font-style: oblique;}
+    .trg {font-family: Consolas, monospace;}
+    .del {font-weight: bold; color: #f00000;}
+    .ins {font-weight: bold; color: #0040ff;}
+    .shift {font-weight: bold;}
+    .match {}
+    .mainrow {border-top: solid black 1px; padding: 1em;}
+    .srcrow {padding-bottom: 15px;}
+    .compcol {border-left: solid lightgray 2px;}
+    .seghead {color: gray; padding-bottom: 0;}
+    .score {font-family: Consolas, monospace; font-size: large; text-align: center;}
+    .detail {font-size: xx-small; color: gray; text-align: right;}
+    .info {font-size: xx-small; color: gray;}
+  </style>
+  <script>
+    function enter(cls) {
+      var elts = document.getElementsByClassName(cls);
+      for (var i=0; i<elts.length; i++)
+        elts[i].style.backgroundColor = "yellow";
+    }
+    function leave(cls) {
+      var elts = document.getElementsByClassName(cls);
+      for (var i=0; i<elts.length; i++)
+        elts[i].style.backgroundColor = "transparent";
+    }
+  </script>
+</head>
+<body>
+<table>
+<tr>
+  <th class="tophead">Seg. id</th>
+  <th class="tophead">
+    <table id="key">
+      <tr>
+        <td>Segment comparison:</td>
+        <td class="trg">
+          <span class="del">Deletion</span><br/>
+          <span class="ins">Insertion</span><br/>
+          <span class="shift">Shift</span>
+        </td>
+      </tr>
+    </table>
+  </th>
+</tr>
+
+<tr>
+  <td class="mainrow">1</td>
+  <td class="mainrow">
+    <table>
+<!-- no source -->
+      <tr>
+        <td class="compcol seghead">human.txt</td>
+      </tr>
+      <tr>
+        <td class="compcol trg"><span title="match: 46" class="match seg1.0_match0" onmouseenter="enter('seg1.0_match0')" onmouseleave="leave('seg1.0_match0')">An einem heißen Abend in Padua trugen sie ihn </span><span title="match: 3" class="match seg1.0_match46" onmouseenter="enter('seg1.0_match46')" onmouseleave="leave('seg1.0_match46')">auf</span><span title="del: 1" class="del seg1.0_diff46" onmouseenter="enter('seg1.0_diff46')" onmouseleave="leave('seg1.0_diff46')">s</span><span title="match: 5" class="match seg1.0_match50" onmouseenter="enter('seg1.0_match50')" onmouseleave="leave('seg1.0_match50')"> Dach</span><span title="del: 8" class="del seg1.0_diff50" onmouseenter="enter('seg1.0_diff50')" onmouseleave="leave('seg1.0_diff50')">, von wo</span><span title="match: 3" class="match seg1.0_match63" onmouseenter="enter('seg1.0_match63')" onmouseleave="leave('seg1.0_match63')"> er</span><span title="del: 10" class="del seg1.0_diff63" onmouseenter="enter('seg1.0_diff63')" onmouseleave="leave('seg1.0_diff63')"> die ganze</span><span title="match: 7" class="match seg1.0_match76" onmouseenter="enter('seg1.0_match76')" onmouseleave="leave('seg1.0_match76')"> Stadt </span><span title="shift(-7): 4" class="shift seg1.0_shift83" onmouseenter="enter('seg1.0_shift83')" onmouseleave="leave('seg1.0_shift83')">über</span><span title="match: 7" class="match seg1.0_match87" onmouseenter="enter('seg1.0_match87')" onmouseleave="leave('seg1.0_match87')">blicken</span><span title="shift(-18): 7" class="shift seg1.0_shift94" onmouseenter="enter('seg1.0_shift94')" onmouseleave="leave('seg1.0_shift94')"> konnte</span><span title="match: 1" class="match seg1.0_match101" onmouseenter="enter('seg1.0_match101')" onmouseleave="leave('seg1.0_match101')">.</span></td>
+      </tr>
+      <tr>
+        <td class="compcol seghead">mt.txt</td>
+      </tr>
+      <tr>
+        <td class="compcol trg"><span title="match: 46" class="match seg1.0_match0" onmouseenter="enter('seg1.0_match0')" onmouseleave="leave('seg1.0_match0')">An einem heißen Abend in Padua trugen sie ihn </span><span title="match: 3" class="match seg1.0_match46" onmouseenter="enter('seg1.0_match46')" onmouseleave="leave('seg1.0_match46')">auf</span><span title="ins: 4" class="ins seg1.0_diff46" onmouseenter="enter('seg1.0_diff46')" onmouseleave="leave('seg1.0_diff46')"> das</span><span title="match: 5" class="match seg1.0_match50" onmouseenter="enter('seg1.0_match50')" onmouseleave="leave('seg1.0_match50')"> Dach</span><span title="ins: 4" class="ins seg1.0_diff50" onmouseenter="enter('seg1.0_diff50')" onmouseleave="leave('seg1.0_diff50')"> und</span><span title="match: 3" class="match seg1.0_match63" onmouseenter="enter('seg1.0_match63')" onmouseleave="leave('seg1.0_match63')"> er</span><span title="shift(-18): 7" class="shift seg1.0_shift94" onmouseenter="enter('seg1.0_shift94')" onmouseleave="leave('seg1.0_shift94')"> konnte</span><span title="ins: 1" class="ins seg1.0_diff63" onmouseenter="enter('seg1.0_diff63')" onmouseleave="leave('seg1.0_diff63')"> </span><span title="shift(-7): 4" class="shift seg1.0_shift83" onmouseenter="enter('seg1.0_shift83')" onmouseleave="leave('seg1.0_shift83')">über</span><span title="ins: 15" class="ins seg1.0_diff63" onmouseenter="enter('seg1.0_diff63')" onmouseleave="leave('seg1.0_diff63')"> den Gipfel der</span><span title="match: 7" class="match seg1.0_match76" onmouseenter="enter('seg1.0_match76')" onmouseleave="leave('seg1.0_match76')"> Stadt </span><span title="ins: 6" class="ins seg1.0_diff76" onmouseenter="enter('seg1.0_diff76')" onmouseleave="leave('seg1.0_diff76')">hinaus</span><span title="match: 7" class="match seg1.0_match87" onmouseenter="enter('seg1.0_match87')" onmouseleave="leave('seg1.0_match87')">blicken</span><span title="match: 1" class="match seg1.0_match101" onmouseenter="enter('seg1.0_match101')" onmouseleave="leave('seg1.0_match101')">.</span></td>
+      </tr>
+      <tr>
+        <td class="score"><span class="detail">60/215= </span>28%</td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td class="mainrow">2</td>
+  <td class="mainrow">
+    <table>
+<!-- no source -->
+      <tr>
+        <td class="compcol seghead">human.txt</td>
+      </tr>
+      <tr>
+        <td class="compcol trg"><span title="del: 2" class="del seg2.0_diff0" onmouseenter="enter('seg2.0_diff0')" onmouseleave="leave('seg2.0_diff0')">Am</span><span title="shift(+25): 7" class="shift seg2.0_shift2" onmouseenter="enter('seg2.0_shift2')" onmouseleave="leave('seg2.0_shift2')"> Himmel</span><span title="del: 6" class="del seg2.0_diff0" onmouseenter="enter('seg2.0_diff0')" onmouseleave="leave('seg2.0_diff0')"> waren</span><span title="match: 19" class="match seg2.0_match15" onmouseenter="enter('seg2.0_match15')" onmouseleave="leave('seg2.0_match15')"> Schornsteinsegler </span><span title="del: 8" class="del seg2.0_diff15" onmouseenter="enter('seg2.0_diff15')" onmouseleave="leave('seg2.0_diff15')">zu sehen</span><span title="match: 1" class="match seg2.0_match42" onmouseenter="enter('seg2.0_match42')" onmouseleave="leave('seg2.0_match42')">.</span></td>
+      </tr>
+      <tr>
+        <td class="compcol seghead">mt.txt</td>
+      </tr>
+      <tr>
+        <td class="compcol trg"><span title="ins: 6" class="ins seg2.0_diff0" onmouseenter="enter('seg2.0_diff0')" onmouseleave="leave('seg2.0_diff0')">Es gab</span><span title="match: 19" class="match seg2.0_match15" onmouseenter="enter('seg2.0_match15')" onmouseleave="leave('seg2.0_match15')"> Schornsteinsegler </span><span title="ins: 2" class="ins seg2.0_diff15" onmouseenter="enter('seg2.0_diff15')" onmouseleave="leave('seg2.0_diff15')">am</span><span title="shift(+25): 7" class="shift seg2.0_shift2" onmouseenter="enter('seg2.0_shift2')" onmouseleave="leave('seg2.0_shift2')"> Himmel</span><span title="match: 1" class="match seg2.0_match42" onmouseenter="enter('seg2.0_match42')" onmouseleave="leave('seg2.0_match42')">.</span></td>
+      </tr>
+      <tr>
+        <td class="score"><span class="detail">31/78= </span>40%</td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td class="mainrow">3</td>
+  <td class="mainrow">
+    <table>
+<!-- no source -->
+      <tr>
+        <td class="compcol seghead">human.txt</td>
+      </tr>
+      <tr>
+        <td class="compcol trg"><span title="match: 41" class="match seg3.0_match0" onmouseenter="enter('seg3.0_match0')" onmouseleave="leave('seg3.0_match0')">Nach einer Weile wurde es dunkel und die </span><span title="del: 5" class="del seg3.0_diff0" onmouseenter="enter('seg3.0_diff0')" onmouseleave="leave('seg3.0_diff0')">Suchs</span><span title="match: 12" class="match seg3.0_match46" onmouseenter="enter('seg3.0_match46')" onmouseleave="leave('seg3.0_match46')">cheinwerfer </span><span title="del: 4" class="del seg3.0_diff46" onmouseenter="enter('seg3.0_diff46')" onmouseleave="leave('seg3.0_diff46')">wurd</span><span title="match: 3" class="match seg3.0_match62" onmouseenter="enter('seg3.0_match62')" onmouseleave="leave('seg3.0_match62')">en </span><span title="del: 13" class="del seg3.0_diff62" onmouseenter="enter('seg3.0_diff62')" onmouseleave="leave('seg3.0_diff62')">eingeschaltet</span><span title="match: 1" class="match seg3.0_match78" onmouseenter="enter('seg3.0_match78')" onmouseleave="leave('seg3.0_match78')">.</span></td>
+      </tr>
+      <tr>
+        <td class="compcol seghead">mt.txt</td>
+      </tr>
+      <tr>
+        <td class="compcol trg"><span title="match: 41" class="match seg3.0_match0" onmouseenter="enter('seg3.0_match0')" onmouseleave="leave('seg3.0_match0')">Nach einer Weile wurde es dunkel und die </span><span title="ins: 1" class="ins seg3.0_diff0" onmouseenter="enter('seg3.0_diff0')" onmouseleave="leave('seg3.0_diff0')">S</span><span title="match: 12" class="match seg3.0_match46" onmouseenter="enter('seg3.0_match46')" onmouseleave="leave('seg3.0_match46')">cheinwerfer </span><span title="ins: 3" class="ins seg3.0_diff46" onmouseenter="enter('seg3.0_diff46')" onmouseleave="leave('seg3.0_diff46')">kam</span><span title="match: 3" class="match seg3.0_match62" onmouseenter="enter('seg3.0_match62')" onmouseleave="leave('seg3.0_match62')">en </span><span title="ins: 6" class="ins seg3.0_diff62" onmouseenter="enter('seg3.0_diff62')" onmouseleave="leave('seg3.0_diff62')">heraus</span><span title="match: 1" class="match seg3.0_match78" onmouseenter="enter('seg3.0_match78')" onmouseleave="leave('seg3.0_match78')">.</span></td>
+      </tr>
+      <tr>
+        <td class="score"><span class="detail">32/146= </span>22%</td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td class="mainrow">4</td>
+  <td class="mainrow">
+    <table>
+<!-- no source -->
+      <tr>
+        <td class="compcol seghead">human.txt</td>
+      </tr>
+      <tr>
+        <td class="compcol trg"><span title="match: 56" class="match seg4.0_match0" onmouseenter="enter('seg4.0_match0')" onmouseleave="leave('seg4.0_match0')">Die anderen gingen hinunter und nahmen die Flaschen mit.</span></td>
+      </tr>
+      <tr>
+        <td class="compcol seghead">mt.txt</td>
+      </tr>
+      <tr>
+        <td class="compcol trg"><span title="match: 56" class="match seg4.0_match0" onmouseenter="enter('seg4.0_match0')" onmouseleave="leave('seg4.0_match0')">Die anderen gingen hinunter und nahmen die Flaschen mit.</span></td>
+      </tr>
+      <tr>
+        <td class="score"><span class="detail">0/112= </span>0%</td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td class="mainrow">5</td>
+  <td class="mainrow">
+    <table>
+<!-- no source -->
+      <tr>
+        <td class="compcol seghead">human.txt</td>
+      </tr>
+      <tr>
+        <td class="compcol trg"><span title="shift(+5): 3" class="shift seg5.0_shift0" onmouseenter="enter('seg5.0_shift0')" onmouseleave="leave('seg5.0_shift0')">Luz</span><span title="match: 5" class="match seg5.0_match3" onmouseenter="enter('seg5.0_match3')" onmouseleave="leave('seg5.0_match3')"> und </span><span title="del: 2" class="del seg5.0_diff3" onmouseenter="enter('seg5.0_diff3')" onmouseleave="leave('seg5.0_diff3')">er</span><span title="match: 40" class="match seg5.0_match10" onmouseenter="enter('seg5.0_match10')" onmouseleave="leave('seg5.0_match10')"> konnten sie unten auf dem Balkon hören.</span></td>
+      </tr>
+      <tr>
+        <td class="compcol seghead">mt.txt</td>
+      </tr>
+      <tr>
+        <td class="compcol trg"><span title="ins: 2" class="ins seg5.0_diff0" onmouseenter="enter('seg5.0_diff0')" onmouseleave="leave('seg5.0_diff0')">Er</span><span title="match: 5" class="match seg5.0_match3" onmouseenter="enter('seg5.0_match3')" onmouseleave="leave('seg5.0_match3')"> und </span><span title="shift(+5): 3" class="shift seg5.0_shift0" onmouseenter="enter('seg5.0_shift0')" onmouseleave="leave('seg5.0_shift0')">Luz</span><span title="match: 40" class="match seg5.0_match10" onmouseenter="enter('seg5.0_match10')" onmouseleave="leave('seg5.0_match10')"> konnten sie unten auf dem Balkon hören.</span></td>
+      </tr>
+      <tr>
+        <td class="score"><span class="detail">7/100= </span>7%</td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td class="mainrow">6</td>
+  <td class="mainrow">
+    <table>
+<!-- no source -->
+      <tr>
+        <td class="compcol seghead">human.txt</td>
+      </tr>
+      <tr>
+        <td class="compcol trg"><span title="match: 29" class="match seg6.0_match0" onmouseenter="enter('seg6.0_match0')" onmouseleave="leave('seg6.0_match0')">Luz setzte sich auf das Bett.</span></td>
+      </tr>
+      <tr>
+        <td class="compcol seghead">mt.txt</td>
+      </tr>
+      <tr>
+        <td class="compcol trg"><span title="match: 29" class="match seg6.0_match0" onmouseenter="enter('seg6.0_match0')" onmouseleave="leave('seg6.0_match0')">Luz setzte sich auf das Bett.</span></td>
+      </tr>
+      <tr>
+        <td class="score"><span class="detail">0/58= </span>0%</td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td class="mainrow">7</td>
+  <td class="mainrow">
+    <table>
+<!-- no source -->
+      <tr>
+        <td class="compcol seghead">human.txt</td>
+      </tr>
+      <tr>
+        <td class="compcol trg"><span title="match: 8" class="match seg7.0_match0" onmouseenter="enter('seg7.0_match0')" onmouseleave="leave('seg7.0_match0')">Sie war </span><span title="match: 6" class="match seg7.0_match8" onmouseenter="enter('seg7.0_match8')" onmouseleave="leave('seg7.0_match8')">frisch</span><span title="shift(-6): 5" class="shift seg7.0_shift14" onmouseenter="enter('seg7.0_shift14')" onmouseleave="leave('seg7.0_shift14')"> und </span><span title="del: 4" class="del seg7.0_diff8" onmouseenter="enter('seg7.0_diff8')" onmouseleave="leave('seg7.0_diff8')">kühl</span><span title="match: 21" class="match seg7.0_match23" onmouseenter="enter('seg7.0_match23')" onmouseleave="leave('seg7.0_match23')"> in der heißen Nacht.</span></td>
+      </tr>
+      <tr>
+        <td class="compcol seghead">mt.txt</td>
+      </tr>
+      <tr>
+        <td class="compcol trg"><span title="match: 8" class="match seg7.0_match0" onmouseenter="enter('seg7.0_match0')" onmouseleave="leave('seg7.0_match0')">Sie war </span><span title="ins: 4" class="ins seg7.0_diff0" onmouseenter="enter('seg7.0_diff0')" onmouseleave="leave('seg7.0_diff0')">cool</span><span title="shift(-6): 5" class="shift seg7.0_shift14" onmouseenter="enter('seg7.0_shift14')" onmouseleave="leave('seg7.0_shift14')"> und </span><span title="match: 6" class="match seg7.0_match8" onmouseenter="enter('seg7.0_match8')" onmouseleave="leave('seg7.0_match8')">frisch</span><span title="match: 21" class="match seg7.0_match23" onmouseenter="enter('seg7.0_match23')" onmouseleave="leave('seg7.0_match23')"> in der heißen Nacht.</span></td>
+      </tr>
+      <tr>
+        <td class="score"><span class="detail">13/88= </span>15%</td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <th>Total</th>
+  <th>
+    <table style="width:100%"><tr><td class="score"><span class="detail">143/797= </span>18%</td></tr></table>
+  </th>
+</tr>
+</table>
+</html>
