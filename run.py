@@ -1,13 +1,13 @@
 import os
 import sys
 
-def run_charcut(human, mt, out_path):
-    os.system(f'python charcut.py -o {out_path} {human},{mt}')
+def run_charcut(mt, human, out_path):
+    os.system(f'python charcut.py -o {out_path} {mt},{human}')
 
 def main(input, format):
     in_dir = input
     out_dir = in_dir+'formatted/'
-    candidate_files = []
+    human_files = []
     mt_files = []
 
     # ensure output directory exists
@@ -61,18 +61,18 @@ def main(input, format):
             if filename == 'mt.txt':
                 mt_files.append(out_file)
             else:
-                candidate_files.append(out_file)
+                human_files.append(out_file)
 
     # ensure output directory exists
     html_out = out_dir+'out/'
     if not os.path.exists(html_out):
         os.makedirs(html_out)
     for mt_file in mt_files:
-        for candidate in candidate_files:
-            candidate_filename = candidate.split(".")[0].split("/")[-1]
+        for human_file in human_files:
+            human_filename = human_file.split(".")[0].split("/")[-1]
             mt_filename = mt_file.split(".")[0].split("/")[-1]
-            out_path = f'{html_out}{candidate_filename}_{mt_filename}.html'
-            run_charcut(candidate, mt_file, out_path)
+            out_path = f'{html_out}{human_filename}_{mt_filename}.html'
+            run_charcut(mt_file, human_file, out_path)
 
 # run this script like: python run.py directoryname/ [format|noformat]
 if __name__ == '__main__':
