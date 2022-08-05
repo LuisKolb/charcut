@@ -1,8 +1,11 @@
 import os
 import sys
 
-def run_charcut(mt, human, out_path):
-    os.system(f'python charcut.py -o {out_path} {mt},{human}')
+# cand  refers to   machine translation
+# ref   refers to   human translation
+
+def run_charcut(cand, ref, out_path):
+    os.system(f'python charcut.py -o {out_path} {cand},{ref} -n')
 
 def main(input, format):
     in_dir = input
@@ -74,8 +77,10 @@ def main(input, format):
             out_path = f'{html_out}{human_filename}_{mt_filename}.html'
             run_charcut(mt_file, human_file, out_path)
 
-# run this script like: python run.py directoryname/ [format|noformat]
+# run this script like: python run.py directoryname/ format|noformat
 if __name__ == '__main__':
+    if len(sys.argv) < 3:
+        print('[ERROR] missing arguments: python run.py directoryname/ format|noformat')
     input = sys.argv[1]
     format = sys.argv[2]
     main(input, format)
