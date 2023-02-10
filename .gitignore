@@ -1,3 +1,6 @@
-.vscode
 data/*
 !data/.gitkeep
+
+venv
+node_modules
+__pycache__
