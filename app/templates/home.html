@@ -1,13 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flask App</title>
-    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
-</head>
-<body>
-    <h1 class="text-blue-600 font-sans font-bold bg-slate-500">Hello, Flask!</h1>
-</body>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='dist/css/output.css')}}"
+    />
+    <script src="{{url_for('static',filename='editor.js')}}" defer></script>
+  </head>
+  <body class="flex flex-col bg-slate-400">
+    <h1 class="text-grey-600 font-sans font-bold text-2xl mx-auto">
+      CharCut Webapp
+    </h1>
+    <div class="flex flex-col p-4">
+      <div class="flex justify-center">
+        <button class="p-4 mb-4 bg-blue-500 text-white rounded-md">
+          Compare
+        </button>
+      </div>
+      <div class="flex flex-row items-stretch justify-center h-auto">
+        <textarea
+          name="candEditor"
+          id="candEditor"
+          wrap="off"
+          class="rounded-l-md grow resize-none outline-none"
+          style="scrollbar-gutter: stable"
+        ></textarea>
+        <textarea
+          id="lineCounter"
+          wrap="off"
+          readonly
+          disabled
+          class="w-16 text-center resize-none pb-4 scrollbar-hide"
+        >1.</textarea>
+        <textarea
+          name="refEditor"
+          id="refEditor"
+          wrap="off"
+          class="rounded-r-md grow outline-none"
+          style="min-height: 80vh; scrollbar-gutter: stable"
+        ></textarea>
+      </div>
+    </div>
+  </body>
 </html>
