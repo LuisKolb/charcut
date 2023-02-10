@@ -1,28 +1,50 @@
 {
-    "version": "2.0.0",
-    "tasks": [{
-        "label": "tailwind-compile",
-        "isBackground": true,
-        "command": "npx", // Could be any other shell command
-        "args": ["tailwindcss","-i","./app/static/src/input.css","-o","./app/static/dist/css/output.css","--watch"],
-        "type": "shell",
-        "problemMatcher": [
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "tailwind-compile",
+      "isBackground": true,
+      "command": "npx", // Could be any other shell command
+      "args": [
+        "tailwindcss",
+        "-i",
+        "./app/static/src/input.css",
+        "-o",
+        "./app/static/dist/css/output.css",
+        "--watch"
+      ],
+      "type": "shell",
+      "problemMatcher": [
+        {
+          "pattern": [
             {
-              "pattern": [
-                {
-                  "regexp": ".",
-                  "file": 1,
-                  "location": 2,
-                  "message": 3
-                }
-              ],
-              "background": {
-                "activeOnStart": true,
-                "beginsPattern": ".",
-                "endsPattern": ".",
-              }
+              "regexp": ".",
+              "file": 1,
+              "location": 2,
+              "message": 3
             }
-          ]
-    }]
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".",
+            "endsPattern": "."
+          }
+        }
+      ]
+    },
+    {
+      "label": "Terminate All Tasks",
+      "command": "echo ${input:terminate}",
+      "type": "shell",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "terminate",
+      "type": "command",
+      "command": "workbench.action.tasks.terminate",
+      "args": "terminateAll"
+    }
+  ]
 }
-
