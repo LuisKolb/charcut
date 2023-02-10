@@ -11,8 +11,8 @@
     />
     <script src="{{url_for('static',filename='editor.js')}}" defer></script>
   </head>
-  <body class="flex flex-col bg-slate-400">
-    <div class="flex flex-col md:flex-row mx-auto align-text-bottom">
+  <body class="flex flex-col bg-slate-200">
+    <div class="flex flex-col md:flex-row mx-auto align-text-bottom mb-4">
       <span class="text-gray-800 font-bold text-2xl my-auto"
         >CharCut Webapp</span
       >
@@ -20,9 +20,9 @@
         (how does this work?)
       </a>
     </div>
-    <div class="flex flex-col p-4 mx-8">
+    <div class="flex flex-col p-4 mx-8 bg-slate-400 rounded-md">
       <div class="flex justify-center">
-        <form action="/compare/" method="post" id="compareForm">
+        <form action="/compare" method="post" id="compareForm">
           <button
             class="py-4 px-8 mb-4 bg-blue-500 text-white rounded-md"
             type="submit">
@@ -45,7 +45,7 @@
           wrap="off"
           readonly
           disabled
-          class="w-16 text-center resize-none pb-4 scrollbar-hide"
+          class="w-12 text-center resize-none pb-4 scrollbar-hide bg-slate-400"
         >1.</textarea>
         <textarea
           name="ref"

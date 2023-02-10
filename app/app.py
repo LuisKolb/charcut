@@ -8,7 +8,11 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 def home():
     return render_template('home.html')
 
-@app.route("/compare/", methods=['POST'])
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route("/compare", methods=['POST'])
 def compare():
     cand = request.form['cand']
     ref = request.form['ref']
