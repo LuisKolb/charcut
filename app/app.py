@@ -26,7 +26,3 @@ def compare():
     os.system(f'python charcut.py -o app/templates/out.html temp/cand.txt,temp/ref.txt -n')
 
     return render_template('out.html')
-
-
-if __name__ == '__main__':
-	app.run()
