@@ -1,8 +1,7 @@
 temp/*
 !temp/.gitkeep
 
-app/static/dist/*
-!app/static/dist/.gitkeep
+
 
 venv
 node_modules
