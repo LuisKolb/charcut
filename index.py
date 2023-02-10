@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, render_template_string, request
 import os
+import argparse
+from charcut import run_on, load_input_files
 
 app = Flask(__name__)
 
@@ -22,6 +24,7 @@ def compare():
     with open('/tmp/ref.txt', 'w') as f_ref:
         f_ref.write(ref)
 
-    os.system(f'python charcut.py -o templates/out.html /tmp/cand.txt,/tmp/ref.txt -n')
+    args = argparse.Namespace(file_pair=['/tmp/cand.txt,/tmp/ref.txt'], src_file=None, match_size=3, alt_norm=True, echo_string ='1')
+    output_string = run_on(load_input_files(args), args)
 
-    return render_template('out.html')
+    return render_template_string(output_string)
