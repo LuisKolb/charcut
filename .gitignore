@@ -7,5 +7,5 @@ venv
 node_modules
 __pycache__
 
-app/templates/out.html
+templates/out.html
 .vercel
