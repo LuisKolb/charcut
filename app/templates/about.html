@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flask App</title>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='dist/output.css')}}"
+    />
+  </head>
+  <body class="flex flex-col bg-slate-200">
+    <a class="flex flex-col md:flex-row mx-auto align-text-bottom mb-4" href="/">
+      <span class="text-gray-800 font-bold text-2xl my-auto"
+        >CharCut Web App</span
+      >
+      <div class="text-gray-600 md:ml-4 text-base mt-auto mx-auto" href="/">
+        (go back)
+      </div>
+    </a>
+    <div class="p-8 bg-slate-400 max-w-screen-md mx-auto rounded-md">
+      <div class="text-xl font-semibold mb-4">
+        Character-based MT evaluation and difference highlighting
+      </div>
+
+      <div class="mb-4">
+        This web app provides an interface to easily access and work with
+        CharCut. To start:
+        <ul>
+          1. Paste your text passages into the two provided fields
+        </ul>
+        <ul>
+          2. Match up sentences ("lines") you want to compare against each other
+        </ul>
+        <ul>
+          3. Hit compare!
+        </ul>
+        <ul>
+          4. If required, simply save the HTML Webpage to download the output
+          file (CTRL+S)
+        </ul>
+      </div>
+      <hr class="mb-4 border-slate-200">
+      <div>
+        The original CharCut paper can be found here:
+        <br>
+        <code class=" underline">
+          <a href="https://github.com/alardill/CharCut">
+            Adrien Lardilleux and Yves Lepage: "CharCut: Human-Targeted
+            Character-Based MT Evaluation with Loose Differences". In
+            Proceedings of IWSLT 2017.
+          </a>
+        </code>
+      </div>
+    </div>
+    <div class="mx-auto mt-4">
+      made with ❤️ by <a href="https://www.luiskolb.at/" class="underline">Luis Kolb</a> for his wonderful mother
+    </div>
+  </body>
+</html>

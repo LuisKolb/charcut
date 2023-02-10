@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flask App</title>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='dist/output.css')}}"
+    />
+    <script src="{{url_for('static',filename='editor.js')}}" defer></script>
+  </head>
+  <body class="flex flex-col bg-slate-200">
+    <div class="flex flex-col md:flex-row mx-auto align-text-bottom mb-4">
+      <span class="text-gray-800 font-bold text-2xl my-auto"
+        >CharCut Web App</span
+      >
+      <a class="text-gray-600 md:ml-4 text-base mt-auto mx-auto" href="/about">
+        (how does this work?)
+      </a>
+    </div>
+    <div class="flex flex-col p-4 mx-8 bg-slate-400 rounded-md">
+      <div class="flex justify-center">
+        <form action="/compare" method="post" id="compareForm">
+          <button
+            class="py-4 px-8 mb-4 bg-blue-500 text-white rounded-md"
+            type="submit">
+            Compare
+          </button>
+        </form>
+      </div>
+      <div class="flex flex-row items-stretch justify-center h-auto">
+        <textarea
+          name="cand"
+          id="candEditor"
+          wrap="off"
+          class="rounded-l-md grow resize-none outline-none"
+          style="scrollbar-gutter: stable"
+          placeholder="Put your candidate (machine-translated) text here..."
+          form="compareForm"
+        ></textarea>
+        <textarea
+          id="lineCounter"
+          wrap="off"
+          readonly
+          disabled
+          class="w-12 text-center resize-none pb-4 scrollbar-hide bg-slate-400"
+        >1.</textarea>
+        <textarea
+          name="ref"
+          id="refEditor"
+          wrap="off"
+          class="rounded-r-md grow outline-none"
+          style="min-height: 80vh; scrollbar-gutter: stable"
+          placeholder="Put your reference (human-translated) text here..."
+          form="compareForm"
+        ></textarea>
+      </div>
+    </div>
+  </body>
+</html>
