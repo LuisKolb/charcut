@@ -1,6 +1,11 @@
-data/*
-!data/.gitkeep
+temp/*
+!temp/.gitkeep
+
+app/static/dist/css/*
+!app/static/dist/css/.gitkeep
 
 venv
 node_modules
 __pycache__
+
+app/templates/out.html

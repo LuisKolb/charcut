@@ -1,18 +1,28 @@
-from flask import Flask, render_template
-from datetime import datetime
-import re
+from flask import Flask, render_template, request
+import os
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 @app.route("/")
-def hello_world():
+def home():
     return render_template('home.html')
 
-@app.route("/result")
-def hello_there(charcut_output):
+@app.route("/compare/", methods=['POST'])
+def compare():
+    cand = request.form['cand']
+    ref = request.form['ref']
 
-    return 'test'
+    with open('temp/cand.txt', 'w') as f_cand:
+        f_cand.write(cand)
+    
+    with open('temp/ref.txt', 'w') as f_ref:
+        f_ref.write(ref)
+
+    os.system(f'python charcut.py -o app/templates/out.html temp/cand.txt,temp/ref.txt -n')
+
+    return render_template('out.html')
+
 
 if __name__ == '__main__':
 	app.run()

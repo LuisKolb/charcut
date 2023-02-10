@@ -12,22 +12,33 @@
     <script src="{{url_for('static',filename='editor.js')}}" defer></script>
   </head>
   <body class="flex flex-col bg-slate-400">
-    <h1 class="text-grey-600 font-sans font-bold text-2xl mx-auto">
-      CharCut Webapp
-    </h1>
-    <div class="flex flex-col p-4">
+    <div class="flex flex-col md:flex-row mx-auto align-text-bottom">
+      <span class="text-gray-800 font-bold text-2xl my-auto"
+        >CharCut Webapp</span
+      >
+      <a class="text-gray-600 md:ml-4 text-base mt-auto mx-auto" href="/about">
+        (how does this work?)
+      </a>
+    </div>
+    <div class="flex flex-col p-4 mx-8">
       <div class="flex justify-center">
-        <button class="p-4 mb-4 bg-blue-500 text-white rounded-md">
-          Compare
-        </button>
+        <form action="/compare/" method="post" id="compareForm">
+          <button
+            class="py-4 px-8 mb-4 bg-blue-500 text-white rounded-md"
+            type="submit">
+            Compare
+          </button>
+        </form>
       </div>
       <div class="flex flex-row items-stretch justify-center h-auto">
         <textarea
-          name="candEditor"
+          name="cand"
           id="candEditor"
           wrap="off"
           class="rounded-l-md grow resize-none outline-none"
           style="scrollbar-gutter: stable"
+          placeholder="Put your candidate (machine-translated) text here..."
+          form="compareForm"
         ></textarea>
         <textarea
           id="lineCounter"
@@ -37,11 +48,13 @@
           class="w-16 text-center resize-none pb-4 scrollbar-hide"
         >1.</textarea>
         <textarea
-          name="refEditor"
+          name="ref"
           id="refEditor"
           wrap="off"
           class="rounded-r-md grow outline-none"
           style="min-height: 80vh; scrollbar-gutter: stable"
+          placeholder="Put your reference (human-translated) text here..."
+          form="compareForm"
         ></textarea>
       </div>
     </div>
