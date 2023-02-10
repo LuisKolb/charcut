@@ -16,12 +16,12 @@ def compare():
     cand = request.form['cand']
     ref = request.form['ref']
 
-    with open('temp/cand.txt', 'w') as f_cand:
+    with open('/tmp/cand.txt', 'w') as f_cand:
         f_cand.write(cand)
     
-    with open('temp/ref.txt', 'w') as f_ref:
+    with open('/tmp/ref.txt', 'w') as f_ref:
         f_ref.write(ref)
 
-    os.system(f'python charcut.py -o templates/out.html temp/cand.txt,temp/ref.txt -n')
+    os.system(f'python charcut.py -o templates/out.html /tmp/cand.txt,/tmp/ref.txt -n')
 
     return render_template('out.html')
