@@ -22,7 +22,7 @@ def main(input, format):
 
         # checking if it is a file
         if os.path.isfile(f):
-            if format == 'format':
+            if format == 'format' or format == 'onlyformat':
                 print(f'[INFO] processing file {f} with formatting')
                 with open(f, 'r') as file:
                     # remove file if it exists (e.g. from a previous run)
@@ -65,6 +65,9 @@ def main(input, format):
                 mt_files.append(out_file)
             else:
                 human_files.append(out_file)
+    
+    if format == 'onlyformat': 
+        return
 
     # ensure output directory exists
     html_out = out_dir+'out/'
@@ -77,10 +80,10 @@ def main(input, format):
             out_path = f'{html_out}{human_filename}_{mt_filename}.html'
             run_charcut(mt_file, human_file, out_path)
 
-# run this script like: python run.py directoryname/ format|noformat
+# run this script like: python run.py directoryname/ format|noformat|onlyformat
 if __name__ == '__main__':
     if len(sys.argv) < 3:
-        print('[ERROR] missing arguments: python run.py directoryname/ format|noformat')
+        print('[ERROR] missing arguments: python run.py directoryname/ format|noformat|onlyformat')
     input = sys.argv[1]
     format = sys.argv[2]
     main(input, format)
