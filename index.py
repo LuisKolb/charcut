@@ -17,13 +17,22 @@ def compare():
     cand = request.form['cand']
     ref = request.form['ref']
 
+    try:
+        matchSize = (int) (request.form['matchSize'])
+        if request.form['altNorm']: altNorm = True
+        else: altNorm = False
+    except:
+        # use the defaults
+        matchSize = 3
+        altNorm = True
+
     with open('/tmp/cand.txt', 'w') as f_cand:
         f_cand.write(cand)
     
     with open('/tmp/ref.txt', 'w') as f_ref:
         f_ref.write(ref)
 
-    args = argparse.Namespace(file_pair=['/tmp/cand.txt,/tmp/ref.txt'], src_file=None, match_size=3, alt_norm=True, echo_string ='1')
+    args = argparse.Namespace(file_pair=['/tmp/cand.txt,/tmp/ref.txt'], src_file=None, echo_string ='1', match_size=matchSize, alt_norm=altNorm)
     output_string = run_on(load_input_files(args), args)
 
     #return render_template_string(output_string)

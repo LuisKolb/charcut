@@ -54,7 +54,10 @@ function line_counter() {
 }
 
 function check_equal_lines() {
-    if (candEditor.value.split('\n').length == refEditor.value.split('\n').length) {
+    if (candEditor.value == '' && refEditor.value == '') {
+        submitBtn.disabled = true
+        submitBtn.textContent = "⚠️ No Text Provided"
+    } else if (candEditor.value.split('\n').length == refEditor.value.split('\n').length) {
         submitBtn.disabled = false
         submitBtn.textContent = "Compare Text!"
     } else {
