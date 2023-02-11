@@ -40,6 +40,11 @@ Consider lowering the `-m` option value (minimum match size) for non-alphabetica
 
 ## Changes
 
+11/02/2022
+
+* added a Flask app to use charcut in the browser - includes modifications to charcut.py to be able to output strings instead of only dumping to files
+* deployed to Vercel at [charcut.vercel.app](https://charcut.vercel.app/)
+
 27/07/2022
 
 * forked by [Luis Kolb](https://github.com/LuisKolb) to include a directory crawler+formatting+execution script (`run.py`)
