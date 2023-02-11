@@ -1,11 +1,11 @@
 temp/*
 !temp/.gitkeep
 
-app/static/dist/*
-!app/static/dist/.gitkeep
+
 
 venv
 node_modules
 __pycache__
 
-app/templates/out.html
+templates/out.html
+.vercel

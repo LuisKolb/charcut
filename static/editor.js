@@ -1,6 +1,7 @@
 let candEditor = document.getElementById("candEditor");
 let refEditor = document.getElementById("refEditor");
 let lineCounter = document.getElementById("lineCounter");
+let submitBtn = document.getElementById('submitBtn')
 
 
 candEditor.addEventListener('scroll', () => {
@@ -52,16 +53,31 @@ function line_counter() {
       lineCountCache = lineCount;
 }
 
+function check_equal_lines() {
+    if (candEditor.value == '' && refEditor.value == '') {
+        submitBtn.disabled = true
+        submitBtn.textContent = "⚠️ No Text Provided"
+    } else if (candEditor.value.split('\n').length == refEditor.value.split('\n').length) {
+        submitBtn.disabled = false
+        submitBtn.textContent = "Compare Text!"
+    } else {
+        submitBtn.disabled = true
+        submitBtn.textContent = "⚠️ Unequal Line Count"
+    }
+}
+
 candEditor.addEventListener('input', () => {
     line_counter();
     let diff = candEditor.value.split('\n').length - refEditor.value.split('\n').length
     if (diff > 0) refEditor.value = refEditor.value + '\n'.repeat(diff)
+    check_equal_lines()
 });
 
 refEditor.addEventListener('input', () => {
     line_counter();
     let diff = refEditor.value.split('\n').length - candEditor.value.split('\n').length
     if (diff > 0) candEditor.value = candEditor.value + '\n'.repeat(diff)
+    check_equal_lines()
 });
 
 
@@ -72,4 +88,7 @@ function syncHeight() {
 }
 
 new ResizeObserver(syncHeight).observe(refEditor)
+
+
+
 

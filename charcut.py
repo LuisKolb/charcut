@@ -29,6 +29,7 @@ import gzip
 import math
 import os.path
 import re
+import sys
 
 from collections import defaultdict, Counter
 from itertools import chain
@@ -55,6 +56,8 @@ def add_parser_output_options(parser):
                         help='generate a html file with per-segment scores and highlighting')
     parser.add_argument('-p', '--plain-output-file',
                         help='generate a plain text file with per-segment scores only')
+    parser.add_argument('-e', '--echo-string',
+                        help='output programatically to sys.stdout')
 
 
 def parse_args():
@@ -667,6 +670,66 @@ def html_dump(out_file, aligned_segs, styled_ops, seg_scores, doc_costs, doc_div
 </table>
 </html>'''.format(score_row), file=out_file)
 
+def html_str_dump(aligned_segs, styled_ops, seg_scores, doc_costs, doc_divs, args):
+    """
+    Apply highlighting on all segments and output them in HTML.
+
+    aligned_segs are the input segments as returned by load_input_files().
+    styled_ops are the decorated operations as returned by compare_segments().
+    seg_scores are the pairs (cost, div) as returned by score_all().
+    """
+    html_top = '''
+<table>
+<tr>
+  <th class="tophead">Seg. id</th>
+  <th class="tophead">
+    <table id="key">
+      <tr>
+        <td>Segment comparison:</td>
+        <td class="trg">
+          <span class="del">Deletion</span><br/>
+          <span class="ins">Insertion</span><br/>
+          <span class="shift">Shift</span>
+        </td>
+      </tr>
+    </table>
+  </th>
+</tr>'''
+    res = html_top
+    src_basename = os.path.basename(args.src_file) if args.src_file else ''
+    basename_pairs = [list(map(os.path.basename, pair.split(','))) for pair in args.file_pair]
+    bullets = make_coloured_bullets(chain(*basename_pairs))
+    prev_id = None
+    for segs, ops, score_pairs in zip(aligned_segs, styled_ops, seg_scores):
+        if prev_id:
+            # There may be mismatches with unsafe input
+            try:
+                skipped = int(segs[0]) - int(prev_id) - 1
+            except ValueError:
+                # Some seg ids contain letters, just ignore
+                skipped = None
+            if skipped:
+                res += '''
+<tr>
+  <td class="info" title="Mismatch - {} seg. skipped">[...]</td>
+</tr>'''.format(skipped)
+
+        prev_id = segs[0]
+        res += segs2html(segs, ops, score_pairs, src_basename, basename_pairs, bullets)
+
+    score_cell = '<td class="score"><span class="detail">{:.0f}/{:.0f}= </span>{:.0%}</td>'
+    score_row = ''.join(score_cell.format(doc_cost, doc_div, (1.*doc_cost/doc_div) if doc_div else 0)
+                        for doc_cost, doc_div in zip(doc_costs, doc_divs))
+    res += '''
+<tr>
+  <th>Total</th>
+  <th>
+    <table style="width:100%"><tr>{}</tr></table>
+  </th>
+</tr>
+</table>
+'''.format(score_row)
+    return res
 
 def format_score(cost, div):
     score = (1. * cost / div) if div else 0.
@@ -692,6 +755,9 @@ def run_on(aligned_segs, args):
 
     doc_costs = [sum(cost for cost, _ in pairs) for pairs in pair_scores]
     doc_divs = [sum(div for _, div in pairs) for pairs in pair_scores]
+
+    if getattr(args, 'echo_string', None):
+       return html_str_dump(aligned_segs, styled_ops, seg_scores, doc_costs, doc_divs, args)
 
     print('\t'.join(format_score(doc_cost, doc_div)
                     for doc_cost, doc_div in zip(doc_costs, doc_divs)))

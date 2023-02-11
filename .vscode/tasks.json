@@ -8,9 +8,9 @@
       "args": [
         "tailwindcss",
         "-i",
-        "./app/static/src/input.css",
+        "./static/src/input.css",
         "-o",
-        "./app/static/dist/output.css",
+        "./static/dist/output.css",
         "--watch"
       ],
       "type": "shell",
