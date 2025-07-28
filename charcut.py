@@ -763,12 +763,12 @@ def run_on(aligned_segs, args):
                     for doc_cost, doc_div in zip(doc_costs, doc_divs)))
 
     if getattr(args, 'plain_output_file', None):
-        with open(args.plain_output_file, 'w') as plain_file:
+        with open(args.plain_output_file, 'w', encoding='utf-8') as plain_file:
             for pairs in seg_scores:
                 print('\t'.join(format_score(*pair) for pair in pairs), file=plain_file)
 
     if getattr(args, 'html_output_file', None):
-        with open(args.html_output_file, 'w') as html_file:
+        with open(args.html_output_file, 'w', encoding='utf-8') as html_file:
             html_dump(html_file, aligned_segs, styled_ops, seg_scores, doc_costs, doc_divs, args)
 
     return (1. * doc_costs[0] / doc_divs[0]) if doc_divs[0] else 0., len(aligned_segs)
