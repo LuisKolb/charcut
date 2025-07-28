@@ -1,99 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flask App</title>
-    <link
-      rel="stylesheet"
-      href="{{url_for('static',filename='dist/output.css')}}"
-    />
-    <script src="{{url_for('static',filename='editor.js')}}" defer></script>
-  </head>
-  <body class="flex flex-col bg-slate-200">
-    <div class="flex flex-col md:flex-row mx-auto my-4 items-baseline">
-      <span class="text-gray-800 font-bold text-2xl my-auto"
-        >CharCut Web App</span
-      >
-      <a class="text-gray-600 md:ml-4 text-base mt-auto mx-auto" href="/about">
-        (click for instructions & info)
-      </a>
-    </div>
-    <div class="flex flex-col p-4 mx-8 bg-slate-400 rounded-md">
-      <div
-        class="flex flex-col md:flex-row items-center w-full justify-between md:mb-4"
-      >
-        <form
-          action="/compare"
-          method="post"
-          id="compareForm"
-          class="mb-4 md:mb-0"
-        >
-          <button
-            class="py-4 px-8 bg-blue-500 text-white rounded-md disabled:bg-gray-500 disabled:cursor-not-allowed disabled:text-gray-100"
-            type="submit"
-            id="submitBtn"
-            disabled
-          >
-            ⚠️ No Text Provided
-          </button>
-        </form>
 
-        <div class="flex flex-col mb-4 md:mb-0 md:mr-4 items-end">
-          <div class="flex flex-row items-baseline">
-            <input
-              type="number"
-              name="matchSize"
-              id="matchSize"
-              form="compareForm"
-              value="3"
-              class="w-16"
-            />
-            <label for="matchSize" class="ml-2">min. characters to match</label>
-          </div>
-          <div class="flex flex-row items-center">
-            <input
-              type="checkbox"
-              name="altNorm"
-              id="altNorm"
-              form="compareForm"
-              class="scale-125"
-              checked
-            />
-            <label for="altNorm" class="ml-2">alternative Normalization</label>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home | CharCut Online</title>
+  <link rel="stylesheet" href="{{url_for('static',filename='dist/output.css')}}" />
+  <script src="{{url_for('static',filename='editor.js')}}" defer></script>
+  <style>
+    #candEditor,
+    #refEditor,
+    #lineCounter {
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.4;
+      border: none;
+      white-space: pre;
+      /* Alternating line backgrounds */
+      background-image: repeating-linear-gradient(to bottom,
+          transparent 0px,
+          transparent 19.6px,
+          /* line-height * font-size = 1.4 * 14px = 19.6px */
+          rgba(0, 0, 0, 0.03) 19.6px,
+          rgba(0, 0, 0, 0.03) 39.2px
+          /* 2 * line-height * font-size */
+        );
+      background-attachment: local;
+      /* Important: makes background scroll with content */
+    }
+
+    #lineCounter {
+      background-color: #94a3b8;
+      /* slate-400 */
+      color: #475569;
+      border-left: 1px solid #64748b;
+      border-right: 1px solid #64748b;
+      overflow: hidden;
+      user-select: none;
+      text-align: center;
+      /* Stronger alternating lines for line counter */
+      background-image: repeating-linear-gradient(to bottom,
+          rgba(255, 255, 255, 0.1) 0px,
+          rgba(255, 255, 255, 0.1) 19.6px,
+          rgba(0, 0, 0, 0.1) 19.6px,
+          rgba(0, 0, 0, 0.1) 39.2px);
+    }
+
+    /* Optional: Enhance focus state with stronger alternating lines */
+    #candEditor:focus,
+    #refEditor:focus {
+      background-image: repeating-linear-gradient(to bottom,
+          transparent 0px,
+          transparent 19.6px,
+          rgba(0, 123, 255, 0.08) 19.6px,
+          /* Subtle blue tint */
+          rgba(0, 123, 255, 0.08) 39.2px);
+    }
+  </style>
+</head>
+
+<body class="flex flex-col bg-slate-200">
+  <div class="flex flex-col md:flex-row mx-auto my-4 items-baseline">
+    <span class="text-gray-800 font-bold text-2xl my-auto">CharCut Web App</span>
+    <a class="text-gray-600 md:ml-4 text-base mt-auto mx-auto" href="/about">
+      (click for instructions & info)
+    </a>
+  </div>
+  <div class="flex flex-col p-4 mx-8 bg-slate-400 rounded-md">
+    <div class="flex flex-col md:flex-row items-center w-full justify-between md:mb-4">
+      <form action="/compare" method="post" id="compareForm" class="mb-4 md:mb-0">
+        <button
+          class="py-4 px-8 bg-blue-500 text-white rounded-md disabled:bg-gray-500 disabled:cursor-not-allowed disabled:text-gray-100"
+          type="submit" id="submitBtn" disabled>
+          ⚠️ No Text Provided
+        </button>
+      </form>
+
+      <div class="flex flex-col mb-4 md:mb-0 md:mr-4 items-end">
+        <div class="flex flex-row items-baseline">
+          <input type="number" name="matchSize" id="matchSize" form="compareForm" value="3" class="w-16" />
+          <label for="matchSize" class="ml-2">min. characters to match</label>
+        </div>
+        <div class="flex flex-row items-center">
+          <input type="checkbox" name="altNorm" id="altNorm" form="compareForm" class="scale-125" checked />
+          <label for="altNorm" class="ml-2">alternative Normalization</label>
         </div>
       </div>
-      <div class="flex flex-row items-stretch justify-center h-auto">
-        <textarea
-          name="cand"
-          id="candEditor"
-          wrap="off"
-          class="rounded-l-md grow resize-none outline-none"
-          style="scrollbar-gutter: stable"
-          placeholder="Put your candidate (machine-translated) text here..."
-          form="compareForm"
-        ></textarea>
-        <textarea
-          id="lineCounter"
-          wrap="off"
-          readonly
-          disabled
-          class="w-12 text-center resize-none pb-4 scrollbar-hide bg-slate-400"
-        >
-1.</textarea
-        >
-        <textarea
-          name="ref"
-          id="refEditor"
-          wrap="off"
-          class="rounded-r-md grow resize-none outline-none"
-          style="min-height: 80vh; scrollbar-gutter: stable"
-          placeholder="Put your reference (human-translated) text here..."
-          form="compareForm"
-        ></textarea>
-      </div>
     </div>
-  </body>
+    <div class="flex flex-row items-stretch justify-center h-auto">
+      <textarea name="cand" id="candEditor" wrap="off" class="rounded-l-md grow resize-none outline-none"
+        style="scrollbar-gutter: stable; min-height: 80vh;"
+        placeholder="Put your candidate (machine-translated) text here..." form="compareForm"></textarea>
+      <textarea id="lineCounter" wrap="off" readonly disabled
+        class="w-12 text-center resize-none scrollbar-hide">1.</textarea>
+      <textarea name="ref" id="refEditor" wrap="off" class="rounded-r-md grow resize-none outline-none"
+        style="min-height: 80vh; scrollbar-gutter: stable"
+        placeholder="Put your reference (human-translated) text here..." form="compareForm"></textarea>
+    </div>
+  </div>
+</body>
+
 </html>

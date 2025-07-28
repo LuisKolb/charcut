@@ -38,7 +38,17 @@ to list them.
 
 Consider lowering the `-m` option value (minimum match size) for non-alphabetical writing systems such as Chinese or Japanese. The default value (3 characters) should be acceptable for most European languages, but depending on the language and data, larger values might produce better looking results.
 
+## WebApp by LuisKolb
+
+
+
+
 ## Changes
+
+28/07/2025
+
+* 
+* 
 
 11/02/2022
 

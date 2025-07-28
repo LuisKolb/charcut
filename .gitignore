@@ -1,11 +1,10 @@
-temp/*
-!temp/.gitkeep
+.tmp
 
-
-
-venv
+# python
+.venv
 node_modules
 __pycache__
 
+# vercel stuff
 templates/out.html
 .vercel

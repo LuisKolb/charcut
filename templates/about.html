@@ -1,69 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flask App</title>
-    <link
-      rel="stylesheet"
-      href="{{url_for('static',filename='dist/output.css')}}"
-    />
-  </head>
-  <body class="flex flex-col bg-slate-200">
-    <a class="flex flex-col md:flex-row mx-auto my-4 items-baseline" href="/">
-      <span class="text-gray-800 font-bold text-2xl my-auto"
-        >CharCut Web App</span
-      >
-      <div class="text-gray-600 md:ml-4 text-base mt-auto mx-auto" href="/">
-        (go back)
-      </div>
-    </a>
-    <div class="p-8 bg-slate-400 max-w-screen-md mx-auto rounded-md">
-      <div class="text-xl font-semibold mb-4">
-        Character-based Machine-Translation Evaluation and Difference
-        Highlighting
-      </div>
 
-      <div class="flex flex-col mb-4 gap-y-4">
-        This web app provides an interface to easily access and work with
-        CharCut [1]. To get started:
-        <ul>
-          1. Paste your text passages into the two provided fields.
-        </ul>
-        <ul>
-          2. Match up sentences ("lines") you want to compare against each other
-          - they need to be on the same height ("line"). That's what the line
-          numbers between the text areas are for.
-        </ul>
-        <ul>
-          3. Hit the big blue button! If it's not blue, it will tell you what to fix.
-        </ul>
-        <ul>
-          4. If required, simply "save" (CTRL+S) the HTML ouput page to download
-          the output file.
-        </ul>
-      </div>
-      <hr class="mb-4 border-slate-200" />
-      <div>
-        [1] the original CharCut paper and GitHub repository can be found here:
-        <br />
-        <code class="underline">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | CharCut Online</title>
+  <link rel="stylesheet" href="{{url_for('static',filename='dist/output.css')}}" />
+</head>
+
+<body class="flex flex-col bg-slate-200">
+  <a class="flex flex-col md:flex-row mx-auto my-4 items-baseline" href="/">
+    <span class="text-gray-800 font-bold text-2xl my-auto">CharCut Web App</span>
+    <div class="text-gray-600 md:ml-4 text-base mt-auto mx-auto" href="/">
+      (go back)
+    </div>
+  </a>
+  <div class="p-8 bg-slate-400 max-w-screen-md mx-auto rounded-md">
+    <div class="text-xl font-semibold mb-4">
+      Character-based Machine-Translation Evaluation and Difference
+      Highlighting
+    </div>
+
+    <div class="flex flex-col mb-4 gap-y-4">
+      This web app provides an interface to easily access and work with
+      CharCut [1]. To get started:
+      <ul>
+        1. Paste your text passages into the two provided fields.
+      </ul>
+      <ul>
+        2. Match up sentences ("lines") you want to compare against each other
+        - they need to be on the same height ("line"). That's what the line
+        numbers between the text areas are for.
+      </ul>
+      <ul>
+        3. Hit the big blue button! If it's not blue, it will tell you what to fix.
+      </ul>
+      <ul>
+        4. If required, simply "save" (CTRL+S) the HTML ouput page to download
+        the output file.
+      </ul>
+    </div>
+    <hr class="mb-4 border-slate-200" />
+    <div>
+      [1] the original CharCut paper and GitHub repository can be found here:
+      <br />
+      <code class="underline">
           <a href="https://github.com/alardill/CharCut">
             Adrien Lardilleux and Yves Lepage: "CharCut: Human-Targeted
             Character-Based MT Evaluation with Loose Differences". In
             Proceedings of IWSLT 2017.
           </a>
         </code>
-      </div>
     </div>
-    <div class="mx-auto mt-4">
-      last updated <code>11.02.2023</code>
-    </div>
-    <div class="mx-auto">
-      made with ❤️ by
-      <a href="https://www.luiskolb.at/" class="underline">Luis Kolb</a> for his
-      wonderful mother
-    </div>
-  </body>
+  </div>
+  <div class="mx-auto mt-4">
+    last updated <code>28.07.2025</code>
+  </div>
+  <div class="mx-auto">
+    made with ❤️ by
+    <a href="https://www.luiskolb.at/" class="underline">Luis Kolb</a> for his
+    wonderful mother
+  </div>
+</body>
+
 </html>
