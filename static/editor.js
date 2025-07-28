@@ -10,11 +10,11 @@ function updateLineBackgrounds() {
     const computedStyle = window.getComputedStyle(candEditor);
     const fontSize = parseFloat(computedStyle.fontSize);
     const lineHeight = parseFloat(computedStyle.lineHeight);
-    
+
     // Calculate actual line height in pixels
     const actualLineHeight = lineHeight || (fontSize * 1.4);
     const doubleLineHeight = actualLineHeight * 2;
-    
+
     // Create the gradient for text areas
     const textareaGradient = `repeating-linear-gradient(
         to bottom,
@@ -23,7 +23,7 @@ function updateLineBackgrounds() {
         rgba(0, 0, 0, 0.03) ${actualLineHeight}px,
         rgba(0, 0, 0, 0.03) ${doubleLineHeight}px
     )`;
-    
+
     // Create the gradient for line counter (stronger contrast)
     const lineCounterGradient = `repeating-linear-gradient(
         to bottom,
@@ -32,12 +32,12 @@ function updateLineBackgrounds() {
         rgba(0, 0, 0, 0.1) ${actualLineHeight}px,
         rgba(0, 0, 0, 0.1) ${doubleLineHeight}px
     )`;
-    
+
     // Apply the gradients
     candEditor.style.backgroundImage = textareaGradient;
     refEditor.style.backgroundImage = textareaGradient;
     lineCounter.style.backgroundImage = lineCounterGradient;
-    
+
     console.log(`Updated line backgrounds: line height = ${actualLineHeight}px`);
 }
 
@@ -87,7 +87,7 @@ function check_equal_lines() {
     const candLines = candEditor.value.split('\n').length;
     const refLines = refEditor.value.split('\n').length;
     const hasContent = candEditor.value.trim() !== '' || refEditor.value.trim() !== '';
-    
+
     if (!hasContent) {
         submitBtn.disabled = true;
         submitBtn.textContent = "⚠️ No Text Provided";
@@ -96,79 +96,56 @@ function check_equal_lines() {
         submitBtn.textContent = "Compare Text!";
     } else {
         submitBtn.disabled = false;
-        submitBtn.textContent = `⚠️ Lines: ${candLines} vs ${refLines} (will auto-fix)`;
+        submitBtn.textContent = `⚠️ Unequal Sentences: ${candLines} vs ${refLines} (will auto-fix)`;
     }
 }
 
-// Force equal line counts by padding with newlines
+// Helper: split lines, ignoring trailing empty lines
+function getTrimmedLines(text) {
+    let lines = text.split('\n');
+    // Remove trailing empty lines
+    while (lines.length > 1 && lines[lines.length - 1] === '') {
+        lines.pop();
+    }
+    return lines;
+}
+
+// Force equal line counts by padding with newlines, ignoring trailing empty lines
 function forceEqualLineCounts() {
-    const candLines = candEditor.value.split('\n');
-    const refLines = refEditor.value.split('\n');
-    const candCount = candLines.length;
-    const refCount = refLines.length;
-    
+    let candLines = getTrimmedLines(candEditor.value);
+    let refLines = getTrimmedLines(refEditor.value);
+    let candCount = candLines.length;
+    let refCount = refLines.length;
+
     if (candCount !== refCount) {
         console.log(`Fixing line count mismatch: Candidate=${candCount}, Reference=${refCount}`);
-        
         if (candCount < refCount) {
-            const linesToAdd = refCount - candCount;
-            candEditor.value += '\n'.repeat(linesToAdd);
-            console.log(`Added ${linesToAdd} lines to candidate`);
+            candLines = candLines.concat(Array(refCount - candCount).fill(''));
         } else {
-            const linesToAdd = candCount - refCount;
-            refEditor.value += '\n'.repeat(linesToAdd);
-            console.log(`Added ${linesToAdd} lines to reference`);
+            refLines = refLines.concat(Array(candCount - refCount).fill(''));
         }
-        
+        // Always join with \n, and ensure both end with a single trailing newline
+        candEditor.value = candLines.join('\n');
+        refEditor.value = refLines.join('\n');
+        // If either originally ended with a newline, preserve that
+        if (candEditor.value[candEditor.value.length - 1] !== '\n') candEditor.value += '\n';
+        if (refEditor.value[refEditor.value.length - 1] !== '\n') refEditor.value += '\n';
+
         line_counter();
         check_equal_lines();
         syncHeight();
-        
         return true;
     }
-    
+    // Also ensure both end with a single trailing newline for backend consistency
+    if (candEditor.value[candEditor.value.length - 1] !== '\n') candEditor.value += '\n';
+    if (refEditor.value[refEditor.value.length - 1] !== '\n') refEditor.value += '\n';
     return false;
 }
-
-// Form submission safeguard
-compareForm.addEventListener('submit', function(e) {
-    const hasContent = candEditor.value.trim() !== '' || refEditor.value.trim() !== '';
-    
-    if (!hasContent) {
-        e.preventDefault();
-        alert('Please provide text in at least one of the text areas.');
-        return false;
-    }
-    
-    const wasFixed = forceEqualLineCounts();
-    
-    if (wasFixed) {
-        const candCount = candEditor.value.split('\n').length;
-        const refCount = refEditor.value.split('\n').length;
-        console.log(`Line counts after fix: Candidate=${candCount}, Reference=${refCount}`);
-        
-        submitBtn.textContent = "Fixed line counts - Submitting...";
-        setTimeout(() => {
-            check_equal_lines();
-        }, 1000);
-    }
-    
-    const finalCandCount = candEditor.value.split('\n').length;
-    const finalRefCount = refEditor.value.split('\n').length;
-    
-    if (finalCandCount !== finalRefCount) {
-        e.preventDefault();
-        alert(`Critical error: Unable to equalize line counts (${finalCandCount} vs ${finalRefCount}). Please check your text.`);
-        return false;
-    }
-    
-    return true;
-});
 
 // Debounce utility
 function debounce(fn, delay) {
     let timer;
-    return function(...args) {
+    return function (...args) {
         clearTimeout(timer);
         timer = setTimeout(() => fn.apply(this, args), delay);
     };
@@ -251,31 +228,3 @@ refEditor.addEventListener('paste', handlePaste);
 
 // Update backgrounds when window is resized (in case font rendering changes)
 window.addEventListener('resize', debounce(updateLineBackgrounds, 100));
-
-// Optional: Add a toggle for line backgrounds
-function addLineBackgroundToggle() {
-    const toggleBtn = document.createElement('button');
-    toggleBtn.type = 'button';
-    toggleBtn.textContent = 'Toggle Line Stripes';
-    toggleBtn.className = 'py-2 px-4 bg-gray-500 text-white rounded-md ml-2';
-    
-    let stripesEnabled = true;
-    
-    toggleBtn.onclick = () => {
-        stripesEnabled = !stripesEnabled;
-        if (stripesEnabled) {
-            updateLineBackgrounds();
-            toggleBtn.textContent = 'Hide Line Stripes';
-        } else {
-            candEditor.style.backgroundImage = 'none';
-            refEditor.style.backgroundImage = 'none';
-            lineCounter.style.backgroundImage = 'none';
-            toggleBtn.textContent = 'Show Line Stripes';
-        }
-    };
-    
-    compareForm.appendChild(toggleBtn);
-}
-
-// Uncomment to add the toggle button
-// addLineBackgroundToggle();

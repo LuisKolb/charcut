@@ -1,11 +1,9 @@
 from flask import Flask, render_template, request
 import argparse
 from charcut import run_on, load_input_files
-from asgiref.wsgi import WsgiToAsgi
 import os
 
 app = Flask(__name__)
-asgi_app = WsgiToAsgi(app)
 
 
 @app.route("/")
@@ -69,6 +67,13 @@ def compare():
 
     cand = request.form["cand"]
     ref = request.form["ref"]
+
+    if len(ref.splitlines()) < len(cand.splitlines()):
+        # extend the reference with empty lines to match the candidate
+        ref += "\n" * (len(cand.splitlines()) - len(ref.splitlines()))
+    elif len(cand.splitlines()) < len(ref.splitlines()):
+        # extend the candidate with empty lines to match the reference
+        cand += "\n" * (len(ref.splitlines()) - len(cand.splitlines()))
 
     with open(cand_fp, "w", encoding="utf-8") as f_cand:
         f_cand.write(cand)
